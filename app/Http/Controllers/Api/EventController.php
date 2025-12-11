@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Registered;
 use Illuminate\Support\Facades\DB;
 use App\Models\Participant;
+use App\Http\Controllers\Api\ValidationException;
 
 class EventController extends Controller
 {
@@ -73,22 +74,29 @@ class EventController extends Controller
     }
     public function createEvent(Request $request)
     {
-        // Validasi
-        $request->validate([
-            "event_name" => "required|string",
-            "event_status" => "required|string",
-            "event_description" => "required|string",
-            "event_address" => "required|string",
-            "event_speaker" => "nullable|string",
-            "register_open_date" => "required|date",
-            "register_closed_date" => "required|date",
-            "register_status" => "required|boolean",
-            "total_participant" => "required|integer",
-            "date" => "required|date",
-            "cost" => "required|integer",
-            "total_income" => "required|integer",
-            "paid_status" => "required|boolean",
-        ]);
+        // Validasi seperlunya saja
+        
+        try {
+            // Validasi seperlunya saja
+            $validated = $request->validate([
+                "event_name" => "required|string",
+                "event_status" => "required|string",
+                "event_description" => "required|string",
+                "event_address" => "required|string",
+                "event_speaker" => "nullable|string",
+                "register_open_date" => "required|date",
+                "register_closed_date" => "required|date",
+                "register_status" => "boolean",
+                "date" => "required|date",
+                "paid_status" => "boolean",
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Validasi gagal",
+                "errors" => $e->errors(),
+            ], 422);
+        }
 
         // Insert ke tabel event_table
         $event = Event::create([
@@ -96,7 +104,7 @@ class EventController extends Controller
             "event_status" => $request->event_status,
         ]);
 
-        // Insert ke event_detail_table
+        // Insert ke tabel event_detail_table
         EventDetail::create([
             "event_id" => $event->event_id,
             "event_description" => $request->event_description,
@@ -104,13 +112,13 @@ class EventController extends Controller
             "event_speaker" => $request->event_speaker,
             "register_open_date" => $request->register_open_date,
             "register_closed_date" => $request->register_closed_date,
-            "register_status" => $request->register_status,
-            "total_participant" => $request->total_participant,
+            "register_status" => $request->register_status ?? false,
+            "total_participant" => 0,        // default 0
             "date" => $request->date,
             "event_handler" => $request->user_id,
-            "cost" => $request->cost,
-            "total_income" => $request->total_income,
-            "paid_status" => $request->paid_status,
+            "cost" => 0,                     // default 0
+            "total_income" => 0,             // default 0
+            "paid_status" => $request->paid_status ?? false,
         ]);
 
         return response()->json([
@@ -119,4 +127,5 @@ class EventController extends Controller
             "event_id" => $event->event_id
         ]);
     }
+
 }
