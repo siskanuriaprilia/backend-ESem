@@ -16,6 +16,8 @@ Route::get('/events',[EventController::class,'getEvent']);
 Route::get('/eventDetail/{id}',[EventController::class,'getDetail']);
 Route::post('/Scan', [AttendanceController::class, 'scan']);
 
+Route::post('/event/create', [EventController::class, 'createEvent']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'User']);
     Route::post('/logout', [AuthController::class, 'logout']);

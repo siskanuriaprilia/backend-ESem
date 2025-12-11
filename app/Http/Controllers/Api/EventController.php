@@ -71,4 +71,52 @@ class EventController extends Controller
             'participants' => $participants,
         ], 200);
     }
+    public function createEvent(Request $request)
+    {
+        // Validasi
+        $request->validate([
+            "event_name" => "required|string",
+            "event_status" => "required|string",
+            "event_description" => "required|string",
+            "event_address" => "required|string",
+            "event_speaker" => "nullable|string",
+            "register_open_date" => "required|date",
+            "register_closed_date" => "required|date",
+            "register_status" => "required|boolean",
+            "total_participant" => "required|integer",
+            "date" => "required|date",
+            "cost" => "required|integer",
+            "total_income" => "required|integer",
+            "paid_status" => "required|boolean",
+        ]);
+
+        // Insert ke tabel event_table
+        $event = Event::create([
+            "event_name" => $request->event_name,
+            "event_status" => $request->event_status,
+        ]);
+
+        // Insert ke event_detail_table
+        EventDetail::create([
+            "event_id" => $event->event_id,
+            "event_description" => $request->event_description,
+            "event_address" => $request->event_address,
+            "event_speaker" => $request->event_speaker,
+            "register_open_date" => $request->register_open_date,
+            "register_closed_date" => $request->register_closed_date,
+            "register_status" => $request->register_status,
+            "total_participant" => $request->total_participant,
+            "date" => $request->date,
+            "event_handler" => $request->user_id,
+            "cost" => $request->cost,
+            "total_income" => $request->total_income,
+            "paid_status" => $request->paid_status,
+        ]);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Event berhasil dibuat",
+            "event_id" => $event->event_id
+        ]);
+    }
 }
