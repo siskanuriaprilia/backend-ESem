@@ -105,13 +105,11 @@ class PaymentController extends Controller
             'event_id' => $bookingData['event_id'],
             'registered_id' => $Registered->registered_id,
         ];
-        $img = public_path('image/icon.png');
         $qrBinary = QrCode::format('png')
             ->size(340)
-            ->merge($img, 0.3, true)
             ->generate(json_encode($qrData));
         $qrBase64 = base64_encode($qrBinary);
-        $qrPng = QrCode::format('png')->size(300)->merge($img, 0.3, true)->generate(json_encode($qrData));
+        $qrPng = QrCode::format('png')->size(300)->generate(json_encode($qrData));
         $fileName = "QR_event_{$qrData['event_id']}_id_{$qrData['registered_id']}.png";
         Storage::disk('public')->put("qr/{$fileName}", $qrPng);
         if (!$bookingData) {

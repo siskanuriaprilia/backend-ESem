@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\AttendanceController;
 
 Route::get('/', function() {
     return 'Laravel is running!';
@@ -13,6 +14,7 @@ Route::post('/login',[AuthController::class,'Login']);
 
 Route::get('/events',[EventController::class,'getEvent']);
 Route::get('/eventDetail/{id}',[EventController::class,'getDetail']);
+Route::post('/Scan', [AttendanceController::class, 'scan']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'User']);
