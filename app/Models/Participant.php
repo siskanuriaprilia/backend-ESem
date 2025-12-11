@@ -10,7 +10,7 @@ use App\Models\Event;
 class Participant extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $casts = [
         'participant_id' => 'integer',
         'event_id' => 'integer',
