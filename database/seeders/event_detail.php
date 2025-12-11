@@ -81,7 +81,7 @@ class event_detail extends Seeder
                 'event_speaker' => 'Sinta Maharani, S.Ds',
                 'register_open_date' => '2025-12-20',
                 'register_closed_date' => '2026-02-05',
-                'register_status' => true, // Ongoing
+                'register_status' => false, // Ongoing
 
                 'total_participant' => 30,
                 'date' => '2026-02-10 11:00:00',

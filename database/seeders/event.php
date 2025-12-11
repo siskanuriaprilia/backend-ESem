@@ -20,7 +20,7 @@ class event extends Seeder
             ],
             [
                 'event_name' => 'Sesi Talkshow Karir Digital',
-                'event_status' => 'Ended',
+                'event_status' => 'On Going',
             ],
             [
                 'event_name' => 'Workshop Pengembangan API Laravel',
@@ -32,7 +32,7 @@ class event extends Seeder
             ],
             [
                 'event_name' => 'Webinar Desain Grafis Dasar',
-                'event_status' => 'Ongoing',
+                'event_status' => 'Ended',
             ],
             [
                 'event_name' => 'Seminar Keamanan Siber Dasar',

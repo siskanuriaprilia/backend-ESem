@@ -9,8 +9,15 @@ use App\Models\Participant;
 class Registered extends Model
 {
     public $timestamps = false;
-    protected  $table = "registered_table";
+    protected $table = "registered_table";
+    protected $casts = [
+        'registered_id' => 'integer',
+        'event_id' => 'integer',
+        'payment_status' => 'boolean',
+    ];
+
     protected $primaryKey = "registered_id";
+
     protected $fillable = [
         "event_id",
         "registered_name",
@@ -19,7 +26,8 @@ class Registered extends Model
         "payment_status",
     ];
 
-    public function participant(){
-        return $this->hasMany(Participant::class,'registered_id','registered_id');
+    public function participant()
+    {
+        return $this->hasMany(Participant::class, 'registered_id', 'registered_id');
     }
 }

@@ -5,9 +5,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
-{
+{   
     protected  $table = "event_table";
     protected $primaryKey = "event_id";
+    protected $casts = [
+    'event_id' => 'integer',
+];
+
     protected $fillable = [
         "event_name",
         "event_status",

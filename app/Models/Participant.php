@@ -10,7 +10,13 @@ use App\Models\Event;
 class Participant extends Model
 {
     use HasFactory;
-    
+
+    protected $casts = [
+        'participant_id' => 'integer',
+        'event_id' => 'integer',
+        'session_id' => 'integer',
+        'registered_id' => 'integer',
+    ];
     protected $table = "participant_table";
     protected $primaryKey = "participant_id";
     protected $fillable = [
@@ -20,10 +26,12 @@ class Participant extends Model
     ];
 
 
-    public function registered(){
-        return $this->belongsTo(Registered::class,'registered_id','registered_id');
+    public function registered()
+    {
+        return $this->belongsTo(Registered::class, 'registered_id', 'registered_id');
     }
-    public function event(){
-        return $this->belongsTo(Event::class,'event_id','event_id');
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id', 'event_id');
     }
 }
