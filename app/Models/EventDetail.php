@@ -14,8 +14,8 @@ class EventDetail extends Model
     protected $casts = [
         'event_detail_id' => 'integer',
         'event_id' => 'integer',
-        'register_open_date' => 'date',
-        'register_closed_date' => 'date',
+        'register_open_date' => 'datetime',
+        'register_closed_date' => 'datetime',
         'register_status' => 'boolean',
         'total_participant' => 'integer',
         'date' => 'datetime',

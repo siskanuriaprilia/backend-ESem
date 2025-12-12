@@ -84,10 +84,10 @@ class EventController extends Controller
                 "event_description" => "required|string",
                 "event_address" => "required|string",
                 "event_speaker" => "nullable|string",
-                "register_open_date" => "required|date",
-                "register_closed_date" => "required|date",
+                "register_open_date" => "required|string",
+                "register_closed_date" => "required|string",
                 "register_status" => "boolean",
-                "date" => "required|date",
+                "date" => "required|string",
                 "paid_status" => "boolean",
             ]);
         } catch (ValidationException $e) {
@@ -110,13 +110,13 @@ class EventController extends Controller
             "event_description" => $request->event_description,
             "event_address" => $request->event_address,
             "event_speaker" => $request->event_speaker,
-            "register_open_date" => $request->register_open_date,
-            "register_closed_date" => $request->register_closed_date,
+            "register_open_date" => $request->register_open_date. " 00:00:00",
+            "register_closed_date" => $request->register_closed_date. " 00:00:00",
             "register_status" => $request->register_status ?? false,
             "total_participant" => 0,        // default 0
-            "date" => $request->date,
+            "date" => $request->date. " 00:00:00",
             "event_handler" => $request->user_id,
-            "cost" => 0,                     // default 0
+            "cost" => $request->cost,                     // default 0
             "total_income" => 0,             // default 0
             "paid_status" => $request->paid_status ?? false,
         ]);
