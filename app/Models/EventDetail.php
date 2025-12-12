@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventDetail extends Model
 {
+    public $timestamps = false;
     use HasFactory;
 
     protected $table = "event_detail_table";
