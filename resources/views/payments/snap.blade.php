@@ -7,7 +7,7 @@
 <style>
     .payment-page {
         padding: 40px 0;
-        background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0f9ff 100%);
+         background: #ffffff; /* putih */
         min-height: 100vh;
     }
 
@@ -53,13 +53,16 @@
     }
 
     .payment-card {
-        background: white;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
-        border: 1px solid rgba(209, 213, 219, 0.3);
-        transition: all 0.3s ease;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.08),
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
     }
+
 
     .payment-card:hover {
         box-shadow: 0 20px 60px rgba(20, 184, 166, 0.1);
@@ -533,7 +536,7 @@
                     <div class="summary-rows">
                         <div class="summary-row">
                             <span>Event Ticket</span>
-                            <span class="price-highlight">Rp {{ number_format($bookingData['event_cost'], 0, ',', '.') }}</span>
+                            <span class="price-highlight">Rp {{ number_format($bookingData['event_cost'], 2, ',', '.') }}</span>
                         </div>
                         <div class="summary-row">
                             <span>Processing Fee</span>
@@ -541,7 +544,7 @@
                         </div>
                         <div class="summary-row total">
                             <span>Total Payment</span>
-                            <span class="price-highlight">Rp {{ number_format($bookingData['event_cost'], 0, ',', '.') }}</span>
+                            <span class="price-highlight">Rp {{ number_format($bookingData['event_cost'], 2, ',', '.') }}</span>
                         </div>
                     </div>
 

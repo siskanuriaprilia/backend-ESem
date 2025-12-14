@@ -4,9 +4,7 @@
 
 @push('styles')
     <style>
-        /* Existing styles remain the same, adding new styles for booking page */
 
-        /* Booking Page Styles */
         .booking-page {
             padding: 40px 0;
             background: #f9fafb;
@@ -889,7 +887,9 @@
                                     <span>🏷️</span>Seminar</span>
                                 </div>
                             </div>
-                            <div class="event-price"> RP {{ $eventData->eventDetail->cost }}</div>
+                            <div class="event-price">
+                                Rp {{ number_format($eventData->eventDetail->cost, 2, ',', '.') }}
+                            </div>
                         </div>
                     </div>
                     <div class="event-description">

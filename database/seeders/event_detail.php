@@ -116,7 +116,7 @@ class event_detail extends Seeder
                 'total_participant' => 50,
                 'date' => '2026-04-10 08:00:00',
                 'event_handler' => 2,
-                'cost' => 10000000,
+                'cost' => 10000,
                 'total_income' => 15000000,
                 'paid_status' => true,
             ],
